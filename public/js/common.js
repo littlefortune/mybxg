@@ -1,4 +1,4 @@
-define(['jquery','cookie'], function ($) {
+define(['jquery','template','cookie'], function ($,template) {
   /*NProgress.start();
   NProgress.done();*/
 
@@ -32,9 +32,13 @@ define(['jquery','cookie'], function ($) {
 
   // 设置用户头像信息
   var loginInfo = $.cookie('loginInfo');
-  loginInfo = loginInfo && JSON.parse(loginInfo);
+  loginInfo = loginInfo && JSON.parse(loginInfo);// json 字符串 转化成 json 对象
   // JSON.parse (str) 将 js 字符串转换成 json 对象数据格式
-  $('.aside .profile .avatar > img').attr('src',loginInfo.tc_avatar);
-  $('.aside .profile h4').html(loginInfo.tc_name);
+  /*$('.aside .profile .avatar > img').attr('src',loginInfo.tc_avatar);
+  $('.aside .profile h4').html(loginInfo.tc_name);*/
 
+  // 模板渲染填充数据
+  var tpl = '<div class="avatar img-circle"><img src="{{tc_avatar}}"></div><h4>{{tc_name}}</h4>';
+  var html = template.render(tpl,loginInfo);
+  $('.aside .profile').html(html);
 });
