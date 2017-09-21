@@ -1,14 +1,12 @@
-define(['jquery','template'],function($,template){
+define(['jquery','template','bootstrap'],function($,template){
   // 调用接口获取所有的讲师数据
   $.ajax({
     url:'/api/teacher',
     type:'get',
     dataType:'json',
     success:function(data){
-      console.log(data.result);
       var html = template('teacherTpl',{list:data.result});
       $('#teacherInfo').html(html);
-
 
       // 注销启用讲师功能
       $('.enabledOrDisabled').on('click',function(){
@@ -34,7 +32,25 @@ define(['jquery','template'],function($,template){
           }
         });
       });
-      
+
+      // 查看讲师功能
+      $('.preview').on('click',function(){
+        var td = $(this).closest('td');// closest() 某个元素最近的父元素 
+        var tcId = td.attr('data-tcId');
+        $.ajax({
+          type:'get',
+          url:'/api/teacher/view',
+          data:{tc_id:tcId},
+          dataType:'json',
+          success:function(data){
+            if (data.code == 200) {
+              var html = template('modalTpl',data.result);
+              $('#modalInfo').html(html);
+              $('#teacherModal').modal();// 弹出模态框
+            }
+          }
+        });
+      });
     }
   });
 });
