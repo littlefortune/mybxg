@@ -3,6 +3,8 @@ require.config({
   paths:{
   	jquery:'jquery/jquery',
     bootstrap:'bootstrap/js/bootstrap.min',
+    datepicker:'bootstrap-datepicker/js/bootstrap-datepicker.min',
+    language:'bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min',
     template:'artTemplate/template-web',
   	cookie:'jquery-cookie/jquery.cookie',
     util:'../js/util',
@@ -14,6 +16,9 @@ require.config({
   shim:{
     bootstrap:{
       deps:['jquery']
+    },
+    language:{
+      deps:['jquery','datepicker']
     }
   }
 });

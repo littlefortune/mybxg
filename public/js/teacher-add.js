@@ -1,4 +1,4 @@
-define(['jquery','template','util'],function($,template,util){
+define(['jquery','template','util','datepicker','language'],function($,template,util){
   var tcId = util.queryString('tc_id');
   if (tcId) {
     // 编辑功能
@@ -30,6 +30,7 @@ define(['jquery','template','util'],function($,template,util){
         type:'post',
         url:url,
         data:$('#teacherForm').serialize(),
+        // 获取 form 表单下所有 input 的值,根据表单的 name 属性，来获取对应的 value 值
         dataType:'json',
         success:function(data){
           if (data.code == 200) {
