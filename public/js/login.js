@@ -14,7 +14,7 @@ define(['jquery','cookie'],function($){
 		  // JSON.stringify(json) 把复杂类型的 json 数据转化成 js 字符串
 		  // 登录成功，跳转到主页面
 		  location.href = '/main/index';
-		}
+		  }
 	  }
 	});
 	return false;// 阻止按钮的默认行为，submit 会自动提交
