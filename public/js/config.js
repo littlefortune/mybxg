@@ -10,6 +10,7 @@ require.config({
     uploadify:'uploadify/jquery.uploadify.min',
     template:'artTemplate/template-web',
   	cookie:'jquery-cookie/jquery.cookie',
+    region:'jquery-region/jquery.region',
     util:'../js/util',
   	common:'../js/common',
   	login:'../js/login',

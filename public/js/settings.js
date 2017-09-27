@@ -1,4 +1,4 @@
-define(['jquery','template','uploadify'],function($,template){
+define(['jquery','template','uploadify','datepicker','language','region'],function($,template){
   // 调用接口，获取个人信息
   $.ajax({
     type:'get',
@@ -21,9 +21,13 @@ define(['jquery','template','uploadify'],function($,template){
           onUploadSuccess:function(a,b,c){// b 代表我们需要的参数，是字符串
             var obj = JSON.parse(b);// 将 json 字符串转化成 json 对象
             $('.preview img').attr('src',obj.result.path); 
-  
           }
         });
+        // 省市区 下拉联动
+        $('#pcd').region({
+          url:'/public/assets/jquery-region/region.json'
+        });
+        
       }
     }
   });
