@@ -1,4 +1,4 @@
-define(['jquery','template','ckeditor','uploadify','datepicker','language','region'],function($,template,CKEDITOR){
+define(['jquery','template','ckeditor','validate','form','uploadify','datepicker','language','region'],function($,template,CKEDITOR,validate){
   // 调用接口，获取个人信息
   $.ajax({
     type:'get',
@@ -34,7 +34,36 @@ define(['jquery','template','ckeditor','uploadify','datepicker','language','regi
             { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
             { name: 'links', groups: [ 'links' ] }
           ]
-        })
+        });
+        // 处理表单提交
+        $('#settingsForm').validate({
+          sendForm:false,
+          valid:function(){
+            // 获取家乡信息
+            var p = $('#p').find('option:selected').text();
+            var c = $('#c').find('option:selected').text();
+            var d = $('#d').find('option:selected').text();
+            var hometown = p + '|' + c + '|' + d;
+            // 同步富文本内容
+            for(var instance in CKEDITOR.instances){
+              CKEDITOR.instances[instance].updateElement();
+            }
+            // 提交表单
+            $(this).ajaxSubmit({
+              type:'post',
+              url:'/api/teacher/modify',
+              data:{tc_hometown:hometown},
+              dataType:'json',
+              success:function(data){
+                if (data.code == 200) {
+
+                  // 修改成功后重新刷新当前页面
+                  // location.reload();
+                }
+              }
+            });
+          }
+        });
         
       }
     }
