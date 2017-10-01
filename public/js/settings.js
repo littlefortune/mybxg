@@ -1,4 +1,4 @@
-define(['jquery','template','uploadify','datepicker','language','region'],function($,template){
+define(['jquery','template','ckeditor','uploadify','datepicker','language','region'],function($,template,CKEDITOR){
   // 调用接口，获取个人信息
   $.ajax({
     type:'get',
@@ -27,6 +27,14 @@ define(['jquery','template','uploadify','datepicker','language','region'],functi
         $('#pcd').region({
           url:'/public/assets/jquery-region/region.json'
         });
+        // 添加富文本功能
+        CKEDITOR.replace('editor',{
+          toolbarGroups : [
+            { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+            { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+            { name: 'links', groups: [ 'links' ] }
+          ]
+        })
         
       }
     }

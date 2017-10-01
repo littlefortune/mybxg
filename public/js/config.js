@@ -11,6 +11,7 @@ require.config({
     template:'artTemplate/template-web',
   	cookie:'jquery-cookie/jquery.cookie',
     region:'jquery-region/jquery.region',
+    ckeditor:'ckeditor/ckeditor',
     util:'../js/util',
   	common:'../js/common',
   	login:'../js/login',
@@ -30,6 +31,9 @@ require.config({
     },
     uploadify:{
       deps:['jquery']
+    },
+    ckeditor:{
+      exports:'CKEDITOR'
     }
   }
 });
