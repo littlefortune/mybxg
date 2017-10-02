@@ -18,8 +18,10 @@ define(['jquery','template','util'],function($,template,util){
       } else {
         data.result.operate = '课程添加';
       }
-      var html = template('basicTpl',data.result);
-      $('#basicInfo').html(html);
+      if (data.code == 200) {
+        var html = template('basicTpl',data.result);
+        $('#basicInfo').html(html);
+      }
     }
   });
 });
