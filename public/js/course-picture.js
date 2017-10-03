@@ -28,6 +28,9 @@ define(['jquery','template','util','uploadify','jcrop','form'],function($,templa
           onUploadSuccess:function(a,b,c){
             var obj = JSON.parse(b.trim());// 将去除 空格后的 json 字符串转化成对象
             $('.preview img').attr('src',obj.result.path);
+            // 上传成功后，直接调用选区
+            cropImage();
+            $('#cropBtn').val('保存图片').attr('data-flag',true);
           }
         });
         // 处理封面裁切
@@ -57,12 +60,16 @@ define(['jquery','template','util','uploadify','jcrop','form'],function($,templa
         });
         // 选中图片
         var img = $('.preview img').eq(0);
+        var nowCrop = null;
         // 封装独立的方法实现裁切功能
         function cropImage(){
           img.Jcrop({
               // setSelect:[100,200,300,400],
               aspectRatio:2
             },function(){
+              // 销毁之前的裁切实例，保证页面当中始终只有一个裁切实例
+              nowCrop && nowCrop.destroy();
+              nowCrop = this;
               // 获取图片的宽和高
               var width = this.ui.stage.width;
               var height = this.ui.stage.height;
