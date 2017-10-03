@@ -12,6 +12,7 @@ require.config({
   	cookie:'jquery-cookie/jquery.cookie',
     region:'jquery-region/jquery.region',
     ckeditor:'ckeditor/ckeditor',
+    jcrop:'jcrop/js/Jcrop',
     util:'../js/util',
   	common:'../js/common',
   	login:'../js/login',
@@ -39,6 +40,9 @@ require.config({
     },
     ckeditor:{
       exports:'CKEDITOR'
+    },
+    jcrop:{
+      deps:['jquery']
     }
   }
 });
